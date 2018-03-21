@@ -1,3 +1,4 @@
+一、上传代码
 第一步：建立git仓库
 cd到你的本地项目根目录下，执行git命令，此命令会在当前目录下创建一个.git文件夹。
 git init
@@ -20,4 +21,11 @@ git remote add origin https://自己的仓库url地址
 git push -u origin master
 
 执行完后，如果没有异常，等待执行完就上传成功了，中间可能会让你输入Username和Password，你只要输入github的账号和密码就行了.
+
+二、全局设置用户名及邮箱
+git config user.name "Your Name" 
+git config user.email you@example.com
+
+三、下载代码
+git  clone  XXXXXX(代码的url)
 
