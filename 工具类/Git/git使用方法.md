@@ -13,6 +13,7 @@ cd到你的本地项目根目录下，执行git命令，此命令会在当前目
 如果想添加某个特定的文件，只需把.换成特定的文件名即可
 
 3：将add的文件commit到仓库
+
     git commit -m "注释语句"
 
 4：去github上创建自己的Repository，点击NewRepository。
@@ -20,17 +21,19 @@ cd到你的本地项目根目录下，执行git命令，此命令会在当前目
     点击Create repository，拿到创建的仓库的https地址
 
 5：将本地的仓库关联到github上
+
     git remote add origin https://自己的仓库url地址
 
 6：上传代码到github远程仓库
+
     git push -u origin master
 
 7：执行完后，如果没有异常，等待执行完就上传成功了，中间可能会让你输入Username和Password，你只要输入github的账号和密码就行了.
 
 ### 二、全局设置用户名及邮箱
-git config user.name "Your Name" 
-git config user.email you@example.com
+    git config user.name "Your Name" 
+    git config user.email you@example.com
 
 ### 三、下载代码
-git  clone  XXXXXX(代码的url)
+    git  clone  XXXXXX(代码的url)
 
