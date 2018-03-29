@@ -1,30 +1,36 @@
-CSRF（Cross-Site Request Forgery）
-1、 参考资料
-链接：http://blog.csdn.net/stpeace/article/details/53512283
+# CSRF（Cross-Site Request Forgery）
 
-2、CSRF的简介
+### 1、 参考资料
+
+	链接：http://blog.csdn.net/stpeace/article/details/53512283
+
+### 2、CSRF的简介
+
 	A.跨站请求伪造。
 	B.CSRF是一种夹持用户在已经登陆的web应用程序上执行非本意的操作的攻击方式。
 	C.CSRF利用了系统对页面浏览器的信任，
 	  XSS利用了系统对用户的信任。
 
-3、CSRF的攻击原理
+### 3、CSRF的攻击原理
+
 	要完成一次CSRF攻击，受害者必须一次完成两个步骤：
 	A.登陆受信任网站A，并在本地生成Cookie。
 	B.在不登出A的情况下，访问危险网站B。
 
-4、CSRF的防御方法
-A.重要数据交互采用POST进行接收，当然用POST也不是万能的，伪造一个form表单即可破解。
+### 4、CSRF的防御方法
 
-B.使用验证码，只要是涉及到数据交互就先进行验证码验证，这个方法可以完全解决CSRF。但是出于用户体验的考虑，网站不能给所有的操作都加上验证码。只能作为一个辅助手段。
+	A.重要数据交互采用POST进行接收，当然用POST也不是万能的，伪造一个form表单即可破解。
 
-C.验证HTTP Referer字段，该字段记录了此次HTTP请求的来源地址，最常见的应用是图片防盗链。PHP中可以采用Apache URL重写规则进行防御。
+	B.使用验证码，只要是涉及到数据交互就先进行验证码验证，这个方法可以完全解决CSRF。但是出于用户体验的考虑，网站不能给所有的操作都加上验证码。只能作为一个辅助手段。
 
-D.为每个表单添加令牌token并验证。可以使用cookie或者session进行构造，但是要解决好XSS攻击。
-	实现token的要求：
+	C.验证HTTP Referer字段，该字段记录了此次HTTP请求的来源地址，最常见的应用是图片防盗链。PHP中可以采用Apache URL重写规则进行防御。
+
+	D.为每个表单添加令牌token并验证。可以使用cookie或者session进行构造，但是要解决好XSS攻击。
+		实现token的要求：
 		（1）要确保同一页面中每个表单都含有自己唯一的令牌。
 		（2）验证后需要删除相应的随机数。
-	token的具体方法：
+
+		token的具体方法：
 		（1）用户访问某个表单页面。
 		（2）服务端生成一个token，放在用户的Session中，或者浏览器的Cookie中。【这里已经不考虑XSS攻击了】
 		（3）在页面表单上附带上token参数。
