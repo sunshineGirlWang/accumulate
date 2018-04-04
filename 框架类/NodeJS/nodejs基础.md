@@ -202,7 +202,39 @@
     非阻塞IO、异步编程
 9、最大化利用CPU的计算能力和可用内存以减少资源浪费。
 
-10、Node.js的编程方式
-    
-11、
+10、异步函数如何工作的关键方法
+    (1)检查和验证参数
+    (2)通知Node.js核心去排队调用相应的函数，并在返回结果的时候通知（调用）回调函数
+    (3)返回给调用者
+  
+11、错误处理和异步函数
+    (1)
+        do_something(param1,param2,...,paramN,function(err,results){...})
+        参数err的值一般会是：
+        A.null，表明操作成功，并且会有一个返回值（如果有需要的话）。
+        B.一个Error对象的实例。
+
+    (2)在回调函数中处理错误的两种不同的代码风格
+        A.one style
+            function(err,handle){
+                if(err){
+                    console.log("ERROR:"+ err.code + "("+ err.message+")");
+                    return;
+                }
+                //if success,continue working here
+            }
+
+        B.other style
+            function(err,handle){
+                if(err){
+                    console.log("ERROR:"+ err.code + "("+ err.message+")");
+                }else{
+                    //if success,continue working here
+                }
+            }
+
+12、我是谁————如何维护本体
+    由于函数作用域是通过闭包保留的，所以self变量会被一直保持着，即使回调函数是被Node.js异步执行的。你可以选择一个喜欢的命名，然后一直用下去，以保持一致性。
+
+13、保持优雅————学会放弃控制权
 
