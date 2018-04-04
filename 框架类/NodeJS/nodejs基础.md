@@ -1,3 +1,4 @@
+## 一、入门
 1、
         var http = require("http");
 
@@ -13,7 +14,7 @@
 
         var s = http.createServer(process_request);
         s.listen(8080);
-
+## 二、进一步了解JavaScript
 2、数据类型
 2.1 核心类型：number、boolean、string、object.
     undefined表示还没有赋值或者不存在；
@@ -98,5 +99,110 @@
     D.实用函数
         push() 或 pop() //向数组的末尾添加或者删除元素
         unshift() 或 shift()  //在数组的头部插入或者删除元素
+        join() //将数组拼接成字符串
+        sort() //数组的排序
+        forEach(function(value,key){......})  //数组的遍历
 
+3、类型比较和转换
+    (1)
+        ==  相等运算符（判断两个操作数有没有相同的值）
+        === 严格相等运算符（判断两个操作数有没有相同的值以及是否为相同的数据类型）
+
+    (2)强烈建议在任何可能的情况下都只使用原始数据类型。
+        虽然对象构造器在功能上和原始数据类型是一样的，但是在===和typeof操作符则会产生不同的结果。
+
+4、函数
+    (1)基本概念
+        A.当函数被调用时，如果传入的参数不够，剩下的变量会被赋予undefined值。而如果传入的参数过多，则多余的参数会被简单地做无用处理。
+
+        B.所有函数在函数体内都会有一个叫做arguments的预定义数组。它拥有函数调用时所有传入的实参，让我们可以对参数列表做额外的检查。
+
+        C.缺少名字的函数通常叫做匿名函数（anonymous function），完全匿名的函数有一个缺点，就是在调试时，抛出的异常中不会告知出现异常的函数名称，会导致调试变得更加困难。
+    
+    (2)函数作用域
+        A.每次调用函数，都会创建一个新的变量作用域。父作用域中声明的变量对该函数是可见的，但是，当函数退出后，该函数作用域中声明的变量就会失效。
+
+        B.可以将作用域和匿名函数结合起来做一些快速或私有的工作。这样，当匿名函数退出后，里面的私有变量也会消失。
+        
+5、语言结构
+    (1)支持三元运算符
+    (2)支持位操作符：& | ~ ^
+    (3)支持while、do...while、for、for...in
+        var user = {
+            first_name: 'nana',
+            last_name: 'enheng'
+        }
+        for(key in user){
+            console.log(key);
+        }
+
+6、类、原型和继承
+    (1)JS中所有的类都是以函数的形式定义的。
+
+    (2)默认情况下，所有的JS对象都有一个原型（prototype）对象，它是一种继承属性和方法的机制。
+
+    (3)__proto__属性：它能够告诉JS声明的新类的基本原型应该是指定的类型，因此也就可以从指定的类进行扩展。
+        function Shape(){    
+        }
+        Shape.prototype.X = 0;
+        Shape.prototype.Y = 0;
+        Shape.prototype.move = function(x,y){
+            this.X = x;
+            this.Y = y;
+        }
+        Shape.prototype.distance_from_origin = function(){
+            return Math.sqrt(this.X * this.X + this.Y * this.Y);
+        }
+        Shape.prototype.area = function(){
+            throw new Error("I don't have a form yet");
+        }
+
+        var s = new Shape();
+        s.move(10,10);
+        console.log(s.distance_from_origin());
+
+        function Square(){       
+        }
+        Square.prototype = new Shape();
+        Square.prototype.__proto__ = Shape.prototype;
+        Square.prototype.Width = 0;
+        Square.prototype.area = function(){
+            return this.Width * this.Width;
+        }
+
+        var sq =  new Square();
+        sq.move(-5,-5);
+        sq.Width = 5;
+        console.log(sq.area());
+        console.log(sq.distance_from_origin());
+
+
+7、错误和异常
+    (1)JS中，通常使用Error对象和一条信息来标识一个错误。
+    (2)可以通过try...catch语句块来捕捉错误。
+
+8、几个重要的Node.js全局对象
+    (1)global对象
+        任何附加到该对象上的东西在node应用中的任何地方都是可见的。
+
+    (2)console对象
+        A.warn(msg)：与log类似的函数，但打印的是标准错误stderr。
+
+        B.time(label)和timeEnd(label)：第一个函数被调用时会标识一个时间戳，而当第二个函数被调用时，会打印出从time函数被调用后中间经过的时间。
+
+        C.assert(cond,message):如果cond等价于false，则抛出一个AssertionFailure异常。
+
+    (3)process对象
+        process对象包含许多信息和方法。
+        exit方法是终止Node.js程序的方式之一；
+        env函数会返回一个对象，包含了当前用户的环境变量；
+        cwd返回应用程序当前的工作目录。
+
+## 三、异步编程
+    非阻塞IO、异步编程
+9、最大化利用CPU的计算能力和可用内存以减少资源浪费。
+
+10、Node.js的编程方式
+    
+11、
 
