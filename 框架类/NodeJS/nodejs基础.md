@@ -237,4 +237,34 @@
     由于函数作用域是通过闭包保留的，所以self变量会被一直保持着，即使回调函数是被Node.js异步执行的。你可以选择一个喜欢的命名，然后一直用下去，以保持一致性。
 
 13、保持优雅————学会放弃控制权
+    (1)Node运行在单线程中，使用事件轮询来调用外部函数和服务。它将回调函数插入事件队列中来等待响应，并且尽快执行回调函数。
 
+    (2)不适合的应用场景：作为计算服务器
+
+    (3)适合的应用场景：适合一些常见的网络应用服务，比如那些需要大量I/O或者需要向其他服务请求的任务。
+
+    (4)如果只是偶尔执行高强度计算的任务，那么可以利用全局对象process中的nextTick方法。（这个方法就好像在跟系统说：我放弃执行控制权，你可以在空闲的时候执行我提供给你的函数。）
+
+14、同步函数调用
+    var fs = require('fs');
+    var handle = fs.openSync('info.txt','r');
+    var buf = new Buffer(100000);
+    var read = fs.readSync(handle,buf,0,10000,null);
+    console.log(buf.toString('utf8',0,read));
+    fs.closeSync(handle);
+
+## 四、编写简单应用
+15、第一个JSON服务器
+    var http = require('http');
+    function handle_incoming_request(req,res){
+        console.log("INCOMING REQUEST:" + req.method + "" + req.url);
+        res.writeHead(200,{"Content-Type": "application/json"});
+        res.end(JSON.stringify({error: null}) + "\n");
+    }
+    var s = http.createServer(handle_incoming_request);
+    s.listen(8080);
+
+16、
+
+
+## 五、
