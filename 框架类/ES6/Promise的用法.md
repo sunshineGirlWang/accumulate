@@ -1,3 +1,4 @@
+###     Promise的用法
 1、Promise对象
 
 	A.主要用于异步计算。
