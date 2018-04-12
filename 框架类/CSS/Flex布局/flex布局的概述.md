@@ -13,7 +13,9 @@
     (2)flex-direction: row | row-reverse | column | column-reverse;  
         定义flex布局的主轴方向。flex布局是单方向布局，子元素主要沿着水平行或者垂直列布局。
 
-        A.row: 行方向，flex-direction的默认值，在ltr(left to right， 从左到右)排版方式下从左到右排列，在rtl(right to left， 从右到左)排版方式下从右到左排列。
+        A.row: 行方向，flex-direction的默认值，
+            在ltr(left to right， 从左到右)排版方式下从左到右排列，
+            在rtl(right to left， 从右到左)排版方式下从右到左排列。
         B.row-reverse: 行反方向，在ltr中从右向左，在rtl中从左到右。
         C.column: 列方向，与row相似，只是从上到下。
         D.column-reverse: 列反方向，与row-reverse相似，只是从下到上。
@@ -96,5 +98,5 @@
     (6)align-self: auto | flex-start | flex-end | center | baseline | stretch;
     通过设置某个子元素的align-self属性，可以覆盖align-items所设置的对齐方式。
     属性值与align-items中的意义相同。
-    
+
     注意：float,clear和vertical-align对flex子元素没有任何影响。
