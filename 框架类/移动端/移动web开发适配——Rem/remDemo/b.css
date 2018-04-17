@@ -1,0 +1,6 @@
+.hello {
+  width: px2rem(100px);
+  height: px2rem(100px); }
+  .hello.b {
+    width: px2rem(50px);
+    height: px2rem(50px); }
