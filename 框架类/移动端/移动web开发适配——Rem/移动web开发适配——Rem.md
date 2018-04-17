@@ -51,7 +51,7 @@
         B. //获取视窗高度
         let htmlDom = document.getElementsByTagName('html');
 
-4、相关代码在
+4、相关代码在https://github.com/wang-qingqing/accumulate/tree/master/%E6%A1%86%E6%9E%B6%E7%B1%BB/%E7%A7%BB%E5%8A%A8%E7%AB%AF/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E9%80%82%E9%85%8D%E2%80%94%E2%80%94Rem/remDemo
 
 ### 三、rem适配页面实战
 1、rem与scss结合使用
@@ -59,7 +59,9 @@
     npm install node-sass -g   //安装
     node-sass a.scss b.css    //编译
 
-2、采用rem高仿网易新闻H5版新闻列表页(相关代码在)
+2、采用rem高仿网易新闻H5版新闻列表页
+
+(相关代码在https://github.com/wang-qingqing/accumulate/tree/master/%E6%A1%86%E6%9E%B6%E7%B1%BB/%E7%A7%BB%E5%8A%A8%E7%AB%AF/%E7%A7%BB%E5%8A%A8web%E5%BC%80%E5%8F%91%E9%80%82%E9%85%8D%E2%80%94%E2%80%94Rem/newsPage)
 
     A.页面框架搭建（构建，scss）
     B.页面样式编写
