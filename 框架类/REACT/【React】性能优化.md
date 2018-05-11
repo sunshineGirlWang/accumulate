@@ -58,6 +58,11 @@
 
 8. 
 
+### 二、谈一谈创建React Component的几种方式
+>https://www.cnblogs.com/Unknw/p/6431375.html
+
+### 三、React PureComponent 使用指南
+>http://www.wulv.site/2017-05-31/react-purecomponent.html   【重要】
 
 
 
