@@ -110,9 +110,198 @@
 ### 二、谈一谈创建React Component的几种方式
 >https://www.cnblogs.com/Unknw/p/6431375.html
 
+#### 【1】几种方法
+1. createClass
+
+        var React = require("react");
+        var Greeting = React.createClass({
+            propTypes: {
+                name: React.PropTypes.string  //属性校验
+            },
+            getDefaultProps: function(){
+                return {
+                    name: 'Roy'   //默认属性值
+                }
+            },
+            getInitialState: function(){  //初始化state
+                return {
+                    count: this.props.initialCount
+                }
+            },
+            handleClick: function(){
+                //处理的函数
+            },
+            render: function(){
+                return <h1>Hello,{this.props.name}</h1>
+            }
+        })
+    
+    在createClass中，React对属性中的所有函数都进行了this绑定。
+
+2.  Component
+
+        class Greeting extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {count: props.initialCount};
+                this.handleClick = this.handleClick.bind(this);
+            }
+            render(){
+                return <h1>Hello,{this.props.name}</h1>
+            }
+        }
+
+        Greeting.propTypes = {
+            name: React.PropTypes.string   //React.PropTypes已经弃用了
+        }
+
+        Greeting.defaultProps = {
+            name: 'Roy'
+        }
+
+        export default Greeting;
+
+    用Component创建组件时，React并没有对内部的函数进行this绑定，如果需要，则要手动进行this绑定。
+
+3. PureComponent
+
+    (1)当组件的props或者state发生变化的时候：React会对组件当前的Props和State分别与nextProps和nextState进行比较，
+    
+    当发生变化时，就会对当前组件以及子组件进行重新渲染，否则就不渲染。
+
+    (2)为了避免组件不必要的重新渲染，通过shouldComponentUpdate来优化性能。
+
+    (3)大多数情况下，使用PureComponent来简化代码，提高性能。
+
+    (4)但是PureComponent的自动添加的shouldConponentUpdate函数，只是对props和state进行浅比较（shadow comparison）。
+
+    当props或者state本身是嵌套对象或数组时，浅比较并不能得到预期的结果，
+    
+    这会导致实际的props和state发生了变化，但是组件却没有更新的问题。
+
+    (5)避免第(4)点的情况，就是避免使用可变对象作为props和state，取而代之的是每次返回一个全新的对象。
+    
+    比如：
+
+            handleClick(){
+                this.setState(prevState => ({
+                    words: prevState.words.concat(['mark'])
+                }))
+            }
+    
+    (6)可以考虑使用immutable.js来创建不可变对象，通过它来简化对象比较，提高性能。
+
+4. Stateless Functional Component
+
+    当组件本身只是用来展示，所有数据都是用过props传入的时候，可以使用Stateless Functional Component来快速创建组件。
+
+        import React from 'react';
+        const Button = ({
+            day,increment
+        }) => {
+            return (
+                <div>
+                    <button onClick={increment}>Today is {day}</button>
+                </div>
+            )
+        }
+
+        Button.propTypes = {
+            day: PropTypes.string.isRequired,
+            increment: PropTypes.func.isRequired
+        }
+
+    这种组件，没有自身的状态，相同的props输入，必然会获得完全相同的组件展示。
+
+
+#### 【2】对比
+1. createClass vs Component
+
+    都是用来创建组件的，一个是ES5语法，一个是ES6语法。
+
+2. PureComponent  vs Component
+
+    PureComponent已经定义好了shouldComponentUpdate，而Component需要显示定义。
+
+3. Component vs Stateless Functional Component
+
+        A.Component包含内部state，而后者所有数据都来自props，没有内部state；
+
+        B.Component包含的一些生命周期函数，后面都没有。
+          因为后者没有shouleComponentUpdate，所以也无法控制组件的渲染，
+          也就是说，只要收到新的props，后者就会重渲染。
+
+        C.后者不支持Refs
+
+
+#### 【3】选哪个
+1. createClass 
+    
+    除非对es6语法一窍不通，否则不建议使用这种方式。
+
+2. Stateless Functional Component 
+
+    对于不需要内部状态，且用不到生命周期函数的组件，可以使用这种方式。
+
+    比如展示性的列表组件，可以将列表项定义为这种方式。
+
+3. PureComponent/Component
+
+    对于拥有内部状态，使用生命周期的函数组件，我们可以使用两者之一。
+
+    推荐使用PureComponent，因为它提供了更好的性能，同时强制你使用不可变的对象。
+
+
+
 ### 三、React PureComponent 使用指南
 >http://www.wulv.site/2017-05-31/react-purecomponent.html   【重要】
 
+#### 【1】为什么使用
+PureComponent是取代其前身PureRenderMixin，可以减少不必要的render操作的次数，
+
+从而提高性能，而且可以少些shouleComponentUpdate函数，节省了点代码。
+
+
+#### 【2】原理
+(1)当组件更新时，如果组件的props和state都没发生改变，render方法就不会触发，
+
+省去了Virtual DOM的生成和对比过程，达到提升性能的目的。
+
+(2)具体就是React自动帮我们做了一层浅比较：
+
+    if(this._compositeType === Composites.PureClass){
+        shouldUpdate = !shallowEqual(prevProps,nextProps) || !shallowEqual(inst.state,nextState)
+    }
+
+(3)shallowEqual的功能
+
+    会比较object.keys(state|props)的长度是否一致，每一个key是否两者都有，并且是都是一个引用，
+    也就是只比较了第一层的值，确实很浅，所以深层的嵌套数据是对比不出来的。
+
+
+#### 【3】使用指南
+1. 易变数据不能使用一个引用
+
+2. 不变数据使用一个引用
+
+3. 复杂状态与简单状态不要共用一个组件
+
+4. 与shouldComponentUpdate共存
+
+        如果PureComponent里有shouldComponentUpdate函数的话，
+        直接使用shouldComponentUpdate的结果作为是否更新的依据，
+        没有shouldCompoonentUpdate函数的话，才会去判断是不是PureComponent，是的话再去做shallowEqual浅比较。
+
+5. 老版本兼容写法
+
+        import React { PureComponent, Component } from 'react';
+        class Foo extends (PureComponent || Component) {
+            //...
+        }
+
+#### 【4】总结
+    PureComponent 真正起作用的，只是在一些纯展示组件上，复杂组件用了也没关系，
+    反正 shallowEqual 那一关就过不了，不过记得 props 和 state 不能使用同一个引用哦。
 
 
     
