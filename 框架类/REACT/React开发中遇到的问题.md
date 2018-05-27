@@ -14,4 +14,19 @@
 			)
 		})
 
+3. 在写一个onClick的时候，如果这个function中没有用到this.state或者this.props时，
 
+	建议不要使用this.test.bind(this)这种形式的写法，因为都要重新渲染组件，影响性能。
+
+	常用的几种写法有:
+
+		(1)没有入参时
+			onClick={this.test}
+
+		(2)有入参时
+			onClick={this.test('1')}
+
+		(3)语句很少时
+			onClick={() => this.state.triggle = !this.state.triggle}
+
+4. 
