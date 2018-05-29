@@ -1,4 +1,4 @@
-@Author:sunshineGirlWang O(∩_∩)O 
+@Author:wang-qingqing O(∩_∩)O 
 
 @AddTime:20180327
 
@@ -14,6 +14,8 @@
     A.能渲染模板
     B.实现请求路由映射
     C.数据接口代理到生产或者测试环境
+
+3、常用方式：在开发过程中，模拟后台接口数据，快速地实现前端开发。
 
 ### 二、mock的用法
 1、安装
@@ -90,16 +92,118 @@
         })
 
     H.属性值是Function
+        var fun = function(x){
+            return x+10;
+        }
+        var data = Mock.mock({
+            'name':fun(10)         //返回函数的返回值20
+        })
+
     I.属性值是RegExp
+        根据正则表达式反向生成对应的字符串，用于生成自定义格式的字符串
 
-3.2
+            var data = Mock.mock({
+                ‘name1':/[a-z][A-Z]/,
+                'name2':/\d{1,3}/
+            })
 
-3.3
+        会根据各自的正则表达式进行适配，并且随机返回
 
-3.4
 
-3.5
+3.2 数据占位符DPD
+    关于占位符，占位符只是在属性值是字符串的时候，在字符串里占个位置，并不会出现在最终的属性值中。
+
+    占位符的格式为：@占位符
+
+    关于占位符需要知道以下几点：
+
+    A.用@标识符标识后面的字符串是占位符
+
+    B.占位符的值是从Mock.Random方法中引用的
+
+    C.可以通过Mock.Random.extend()来扩展自定义占位符
+
+    D.占位符可以引用数据模板中的属性
+
+    E.占位符优先引用数据模板中的属性
+
+    F.占位符支持相对路径和决定路径
+
+    var data = Mock.mock({
+        name:{
+            name1:'@FIRST',
+            name2:'@LAST'
+        }    
+    })
+
+
+3.3 Mock.mock()
+
+(1) Mock.mock(rurl?,rtype?,template|function(opt))
+
+    rurl: ajax请求的地址
+    rtype: ajax请求的类型，如’GET','POST'
+    template: 数据模板，就是之前那些个例子
+    function: 生成相应数据的函数
+
+(2)常用的方法
+
+    A. Mock.mock(template)
+
+    B. Mock.mock(rurl,template)，模拟ajax,匹配接收到url的ajax请求，把template对应的数据返回返回
+
+    C. Mock.mock(rurl,function(opt)),模拟ajax,会把函数执行的结果作为ajax回调返回
+
+    D. Mock.mock(rurl,rtype,template) 同上，只是对ajax的类型有要求
+
+    E. Mock.mock(rurl,rtype,function) 同上
+
+
+3.4 Mock.setup(setting)
+
+配置拦截ajax请求的行为，支持的配置项有timeout。
+
+    Mock.setup({
+        timeout:200
+    })
+    Mock.setup({
+        timeout:'200-500
+    })
+
+3.5 Mock.valid(template,data)
+
+这个函数用来判断，数据模板和数据是否一样。
+
+3.6 Mock.toJSONShema(template)
+
+    var template = Mock.mock({
+        'name|1-3':5
+    })
+    var tjs = Mock.toJSONSchema(tempalte);
+
+3.7 Mock.Random
+
+    var Random = Mock.Random;
+    var em1 = Mock.email();
+    var em2 = Mock.mock('@email');
+    var em3 = Mock.mock({
+        email:'@email'
+    })
+
 
 ### 三、mock的原理
+1、Mock主要是关于测被测体与外部的交互逻辑。一般是指在不同场景下多次的与外部交互。
+
+2、当外部依赖是硬件，或者外部程序没有准备好的情况下，Mock就能帮助完成单元测试。
+
+3、Mock的作用就是能通过设置输入输出值，让被测代码的各种工作场景都可以被测试覆盖。
+
+4、为方便测试，程序设计应该采用依赖倒置原则，让被测试类依赖于接口，Mock类实现该接口。
+
+被测类通过调用接口最终调用到Mock类，完成测试。
+
+而被测试类可以不作任何修改就能在实际系统里工作。
+
+这就是使用TDD能很自然的使产品代码于外部依赖松耦合。
 
 
