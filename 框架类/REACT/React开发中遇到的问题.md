@@ -29,4 +29,31 @@
 		(3)语句很少时
 			onClick={() => this.state.triggle = !this.state.triggle}
 
-4. 
+4. 父组件调用子组件的方法：
+	class Parent extends React.Component{
+		<Child  onRef={(ref) => this.child = ref} />
+
+		test = () => {
+			this.child.onchange();
+		}
+	}
+
+	class Child extends React.Component{
+		componentDidMount(){
+			this.props.onRef = this;
+		}
+
+		onchange = () => {
+			alert('child');
+		}
+	}
+
+5. es6中，寻找数组中是否包含某个元素，
+	let arr = [1,2,3,-5]
+	arr.find((n) => n<0)  //-5
+	arr.findIndex((n) => n<0)  //3 
+
+	注意:indexOf方法无法识别数组的NaN成员，但是findIndex可以通过Object.is方法做到。
+	[NaN].findIndex(y => Object.is(NaN,y))
+
+6. 
