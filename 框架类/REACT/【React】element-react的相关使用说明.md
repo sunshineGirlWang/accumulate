@@ -3,12 +3,13 @@
 #### 一、参考资料
 
 #### 二、具体内容
-    
+
 #### 三、组件的修改与扩充
 有的组件并不能满足实际的需要，所以会在其内容上增加一下修改以及扩充。
 
 ***
 **1. Upload增加支持“only-picture”(只展示图片)的listType。** 
+
     思路：增加this.props.listType名为"only-picture"的类型。
 
     修改点：
@@ -116,8 +117,9 @@
             const seconds = isShowSeconds?currentDate.getSeconds():null;
 
     （3）在DatePicker/basic/TimeSpinner.js，constructor方法修改如下：
-
-            this.state.seconds = props.isShowSeconds?this.state.seconds:null;//如果isShowSeconds为false，seconds设置为null
+            
+            //如果isShowSeconds为false，seconds设置为null
+            this.state.seconds = props.isShowSeconds?this.state.seconds:null;
 
 ***
 **3. Checkbox的文本说明，增加title。**
@@ -125,6 +127,7 @@
     思路：增加this.props.showTitle的属性，如果showTitle为true，则展示title。
 
     修改点：
+    
         （1）在Checkbox/CheckBox.js中，render方法中修改如下：
     
             let title = this.props.showTitle?(this.props.children || this.state.label):'';
@@ -146,13 +149,17 @@
             if (type === 'expand') {
                 return (
                     <div
-                    className={this.classNames('ishow-table__expand-icon ', {
-                        'ishow-table__expand-icon--expanded': this.context.store.isRowExpanding(row, rowKey),
+                        className={this.classNames('ishow-table__expand-icon ', {
+                            'ishow-table__expand-icon--expanded': this.context.store.isRowExpanding(row, rowKey),
                     })}
-                    onClick={this.handleExpandClick.bind(this, row, rowKey)}
+                        onClick={this.handleExpandClick.bind(this, row, rowKey)}
                     >
-                    {expandText?<div><span>{expandTitle}</span><i className="ishow-icon ishow-icon-arrow-right" /></div>:<span>收缩</span>}
-                        
+
+                    {
+                        expandText?
+                            <div><span>{expandTitle}</span><i className="ishow-icon ishow-icon-arrow-right" /></div>
+                        :<span>收缩</span>
+                    }               
                     </div>
                 )
             }
