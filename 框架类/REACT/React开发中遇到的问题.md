@@ -56,4 +56,9 @@
 	注意:indexOf方法无法识别数组的NaN成员，但是findIndex可以通过Object.is方法做到。
 	[NaN].findIndex(y => Object.is(NaN,y))
 
-6. 
+6. 使用this.forceUpdate()来更新当前组件的render()方法。
+	
+7. 如果两个兄弟组件A和B，A想调用B组件的方法，必须通过两兄弟的父组件C来调用。
+	例子待补充。
+	
+8. 
