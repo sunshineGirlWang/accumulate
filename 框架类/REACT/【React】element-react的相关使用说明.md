@@ -3,6 +3,18 @@
 #### 一、参考资料
 
 #### 二、具体内容
+***
+**1.TimePicker**
+
+（1）TimePicker的默认时间要设置成标准时间格式，其value值也是标准时间格式的。可以使用new Date()来设置。
+     
+    //此组件是用来选择时分秒的，所以年月日可以随意填写
+    let defaultTimePicker = new Date(2018,1,1,0,0,0);
+
+（2）可能需要将标准时间格式转换为接口需要的格式，比如'YYYY-MM-DD HH:mm:ss'。  
+    
+***
+
 
 #### 三、组件的修改与扩充
 有的组件并不能满足实际的需要，所以会在其内容上增加一下修改以及扩充。
@@ -127,7 +139,7 @@
     思路：增加this.props.showTitle的属性，如果showTitle为true，则展示title。
 
     修改点：
-    
+
         （1）在Checkbox/CheckBox.js中，render方法中修改如下：
     
             let title = this.props.showTitle?(this.props.children || this.state.label):'';
