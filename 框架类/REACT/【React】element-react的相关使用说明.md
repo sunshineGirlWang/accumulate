@@ -155,7 +155,7 @@
 
     修改点：
 
-        (1)在Table/TableBody中，renderCell方法中修改如下：
+        (1)在Table/TableBody.js中，renderCell方法中修改如下：
 
             const { type, selectable,expandText,expandTitle } = column;
             if (type === 'expand') {
@@ -178,4 +178,55 @@
 
 
 ***
-**5.**
+**5. Table中正常使用Select** 
+
+    思路：在Select中增加selectUnderTable={true}，
+         将.ishow-select-dropdown设置为position:fixed，再计算其正确的top值。
+
+    修改点：
+
+    （1）在Select/Select.js中，
+
+        A.增加全局样式：
+
+            .ishow-select-dropdown.ishow-select-undertable {
+                position: fixed !important;
+            }
+
+        B.在onEnter() 方法的new Popper中增加一个option：
+
+            selectUnderTable: this.props.selectUnderTable   
+
+        C.在渲染.ishow-select-dropdown时，根据标识增加一个className：
+
+            <div ref="popper" className={this.classNames('ishow-select-dropdown', {
+                'is-multiple': multiple
+            },this.props.selectUnderTable?'ishow-select-undertable':'')} style={{
+              minWidth: inputWidth,
+            }}>
+
+    （2）在Common/popper.js中，
+
+        A.Popper.prototype.update方法中，增加一行传值：
+
+            data.selectUnderTable = this._options.selectUnderTable;
+
+        B.Popper.prototype.modifiers.applyStyle方法中，根据窗口滚动条高度计算top值：
+
+            if(data.selectUnderTable){//表格内部的Select框    
+                styles.top = top-this.getScrollTop();
+            }else{
+                styles.top = top;
+            }
+
+        C.增加一个获取窗口滚动条高度的方法：
+
+            Popper.prototype.getScrollTop = function() {
+                var scrollTop = 0;
+                if (document.documentElement && document.documentElement.scrollTop) {
+                scrollTop = document.documentElement.scrollTop;
+                } else if (document.body) {
+                scrollTop = document.body.scrollTop;
+                }
+                return scrollTop;
+            } 
