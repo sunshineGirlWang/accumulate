@@ -230,3 +230,27 @@
                 }
                 return scrollTop;
             } 
+
+***
+**6.Table中的一列复选框，不需要展示title**
+
+    思路：根据column中type值，区分是否显示title
+
+    修改点：
+
+    （1）在Table/TableBody.js，renderCell方法中：
+       
+         renderCell(row, column, index, rowKey){
+            const { type, selectable,expandText,notShowTitle } = column;//引入notShowTitle
+
+            ...
+        }
+
+    （2）在Table/TableBody.js，render方法中：
+        <div className="cell" 
+            title={!(column.type == "selection" && column.notShowTitle) && this.renderTitle(this.renderCell(row, column, rowIndex, rowKey))}
+        >
+            {this.renderCell(row, column, rowIndex, rowKey)}
+        </div>
+
+***
