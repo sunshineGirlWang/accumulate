@@ -248,7 +248,7 @@
 
     （2）在Table/TableBody.js，render方法中：
         <div className="cell" 
-            title={!(column.type == "selection" && column.notShowTitle) && this.renderTitle(this.renderCell(row, column, rowIndex, rowKey))}
+            title={(column.type == "selection" && column.notShowTitle)?"": this.renderTitle(this.renderCell(row, column, rowIndex, rowKey))}
         >
             {this.renderCell(row, column, rowIndex, rowKey)}
         </div>
