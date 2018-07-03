@@ -254,3 +254,42 @@
         </div>
 
 ***
+**7.Pagination靠右展示**
+
+    思路：当增加right={true}时，设置text-align:right样式
+
+    修改点：
+
+    （1）在Pagination/Pagination.js中，在render方法中：
+
+        const className = this.classNames({
+            'ishow-pagination': true,
+            'ishow-pagination__rightwrapper': false,
+            'ishow-pagination--small': this.props.small,
+            'ishow-pagination--right': this.props.right
+        })
+
+    （2）在Common/css/Pagination.css中，增加：
+
+        .ishow-pagination--right{
+            text-align: right;
+        }
+
+***
+**8.Table下方，如果使用了Pagination组件，当切换分页大小时，table表格会出现横向滚动条，为解决这一问题，增加一个选项：**
+
+    思路：当增加overflowXHidden={true}时，设置overflow-x: hidden样式
+
+    修改点：
+
+    （1）在Table/Table.js中，在render方法中修改：
+
+        className={props.overflowXHidden?"ishow-table__body-wrapper ishow-table__overflow-x-hidden":"ishow-table__body-wrapper"}
+
+    （2）在Common/css/Table.css中，增加：
+
+        .ishow-table__overflow-x-hidden{
+            overflow-x: hidden;
+        }
+
+***
