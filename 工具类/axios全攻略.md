@@ -35,7 +35,7 @@ npm install axios
         });
 
 
-2.post请求
+2. post请求
 
     axios.post('/user', {
         firstName: 'Fred',
