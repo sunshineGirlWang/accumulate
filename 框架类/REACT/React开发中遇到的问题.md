@@ -24,29 +24,30 @@
 			onClick={this.test}
 
 		(2)有入参时
-			onClick={this.test('1')}
+			onClick={(value) => this.test('key',value)}
 
 		(3)语句很少时
 			onClick={() => this.state.triggle = !this.state.triggle}
 
 4. 父组件调用子组件的方法：
-	class Parent extends React.Component{
-		<Child  onRef={(ref) => this.child = ref} />
 
-		test = () => {
-			this.child.onchange();
-		}
-	}
+		class Parent extends React.Component{
+			<Child  onRef={(ref) => this.child = ref} />
 
-	class Child extends React.Component{
-		componentDidMount(){
-			this.props.onRef = this;
+			test = () => {
+				this.child.onchange();
+			}
 		}
 
-		onchange = () => {
-			alert('child');
+		class Child extends React.Component{
+			componentDidMount(){
+				this.props.onRef = this;
+			}
+
+			onchange = () => {
+				alert('child');
+			}
 		}
-	}
 
 5. es6中，寻找数组中是否包含某个元素，
 	let arr = [1,2,3,-5]
@@ -54,11 +55,16 @@
 	arr.findIndex((n) => n<0)  //3 
 
 	注意:indexOf方法无法识别数组的NaN成员，但是findIndex可以通过Object.is方法做到。
-	[NaN].findIndex(y => Object.is(NaN,y))
+
+		[NaN].findIndex(y => Object.is(NaN,y))
 
 6. 使用this.forceUpdate()来更新当前组件的render()方法。
 	
 7. 如果两个兄弟组件A和B，A想调用B组件的方法，必须通过两兄弟的父组件C来调用。
 	例子待补充。
 	
-8. 
+8. 将一个形如"a:b:c"的字符串转换成数组，其中a、b、c为整型，转换后的数组内也是整数。
+
+		Array.from("1:3:5".split(":"),(value) => Number(value))
+
+9. 
