@@ -67,4 +67,16 @@
 
 		Array.from("1:3:5".split(":"),(value) => Number(value))
 
-9. 
+9. 代码优化：
+
+		let {store,onChange,disabled} = this.props;
+		相当于
+		let store = this.props.store;
+		let onChange = this.props.onChange;
+		let disabled = this.props.disabled;
+
+10. 回调方法：
+
+		callback && typeof (callback) == 'function' && callback(); 
+
+11. 
