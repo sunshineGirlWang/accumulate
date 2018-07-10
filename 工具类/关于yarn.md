@@ -19,4 +19,6 @@
 
 6、安装所有的依赖包
     yarn 或 yarn install
+
+7、
     
