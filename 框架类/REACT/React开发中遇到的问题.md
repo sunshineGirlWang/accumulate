@@ -79,4 +79,49 @@
 
 		callback && typeof (callback) == 'function' && callback(); 
 
-11. 
+11. render中的双重循环：
+
+		<Form.Item label="出游人群" labelWidth="120px">
+			{   
+				tabAttrObj.touristType.length ?
+					this.touristTypeList.map((allType,key) => {
+						return(
+							tabAttrObj.touristType.map((type, index) => {
+								return <div>111</div>
+							})
+						)                                     
+					})
+				:''
+			}
+		</Form.Item>
+
+12. 传入子组件的代码优化：
+
+		<CollectMethod {...this.props}  />
+		相当于
+		<AddInput store={this.props.store} 
+                basicListIndex={this.props.basicListIndex} 
+                tabAttrObj={this.props.tabAttrObj} 
+		/>
+
+13. class 的取值函数（getter）和存值函数（setter）
+
+		class MyClass {
+			constructor() {
+				// ...
+			}
+			get prop() {
+				return 'getter';
+			}
+			set prop(value) {
+				console.log('setter: '+value);
+			}
+
+			render(){
+				return <div>{this.prop}</div>
+			}
+		}
+
+14. 
+		
+
