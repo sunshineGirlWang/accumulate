@@ -232,9 +232,9 @@
             } 
 
 ***
-**6.Table中的一列复选框，不需要展示title**
+**6.Table中的数据不展示title**
 
-    思路：根据column中type值，区分是否显示title
+    思路：在column中，增加一个字段（notShowTitle: true）区分是否显示title
 
     修改点：
 
@@ -248,7 +248,7 @@
 
     （2）在Table/TableBody.js，render方法中：
         <div className="cell" 
-            title={(column.type == "selection" && column.notShowTitle)?"": this.renderTitle(this.renderCell(row, column, rowIndex, rowKey))}
+            title={column.notShowTitle?"": this.renderTitle(this.renderCell(row, column, rowIndex, rowKey))}
         >
             {this.renderCell(row, column, rowIndex, rowKey)}
         </div>
@@ -291,5 +291,17 @@
         .ishow-table__overflow-x-hidden{
             overflow-x: hidden;
         }
+
+***
+**9.Table中，currentRowKey字段的优化**
+
+    问题：在文档中，currentRowKey表示：当前选中行的 key，传入数组时可以控制多选。
+        但在实际运用中，我发现使用数组时，会有warning提示currentRowKey的类型不合法。
+
+    修改点：
+
+    在Table/TableStore.js中，propTypes对象修改：
+
+        currentRowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number,PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))])
 
 ***
