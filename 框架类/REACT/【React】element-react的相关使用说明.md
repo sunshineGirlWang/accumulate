@@ -12,7 +12,32 @@
     let defaultTimePicker = new Date(2018,1,1,0,0,0);
 
 （2）可能需要将标准时间格式转换为接口需要的格式，比如'YYYY-MM-DD HH:mm:ss'。  
+
+
+（3）使用Select时，即使<Select.Option />没有值，也要写一个<Select.Option value={0} />。
+
+    否则，会报错（Uncaught DOMException: Failed to execute 'removeChild' on 'Node': 
     
+    The node to be removed is not a child of this node.）。
+
+        <Select placeholder={disabled?" ":"节日"} 
+            value={tabAttrObj[festival]} 
+            onChange={(value) => onChange(basicListIndex,festival,value)}
+            disabled={disabled}
+        >
+            {
+                enumItem && enumItem.length ?
+                    enumItem.map((option,key) =>{
+                        return (
+                            <Select.Option key={key} value={option.enumItemId} label={option.enumItemValue} />
+                        ) 
+                    })
+                : <Select.Option value={0} />
+            }                              
+        </Select>
+
+（4）
+
 ***
 
 
