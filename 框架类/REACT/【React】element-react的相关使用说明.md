@@ -330,3 +330,21 @@
         currentRowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number,PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))])
 
 ***
+**10.Cascsder中，增加自定义style**
+
+    思路：传入style={...}
+
+    修改点：
+
+    在Cascsder.js的render()方法中修改：（增加style={this.style()}即可）
+
+        <span ref="reference" style={this.style()} className={this.className('ishow-cascader', size ? 'ishow-cascader--' + size : '', {
+            'is-opened': menuVisible,
+            'is-disabled': disabled
+        })}>
+
+***
+**11.Cascsder中，onChange事件返回值增加label**
+
+***
+**12.**
