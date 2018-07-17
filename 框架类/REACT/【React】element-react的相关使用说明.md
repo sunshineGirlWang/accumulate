@@ -346,5 +346,59 @@
 ***
 **11.Cascsder中，onChange事件返回值增加label**
 
+    思路：找到onChange事件的返回方法，根据value的获取过程，写label的获取过程。
+
+    修改点：
+
+    (1)在Cascader/Cascader.js中，定义一个全局变量currentLabels，将render方法中的局部变量currentLabels改成全局变量。
+
+    (2)在Cascader/Cascader.js中，handlePick()方法增加一个label变量，返回给onChange事件。
+            
+            handlePick(value, label,close = true) {
+                this.setState({
+                    currentValue: value
+                });
+
+                if (close) {
+                    this.setState({ menuVisible: false });
+                }
+
+                if (this.props.onChange) {
+                    this.props.onChange(value,label);//onChange事件，增加label返回值 
+                }
+        }
+    
+    (3)在Cascader/Menu.js中，新增activeLabel和label这两个state，
+    
+       参考activeValue的修改数据的路径，修改activeLabel的值。
+
 ***
-**12.**
+**12.Cascader中，无论changeOnSelect是true/false,在点击第三级数据时，要实时调接口查询第四级的数据。**
+
+    思路：定义一个数组levelList，当item.level在此数组中时，将会触发activeItemChange。
+
+        为了提高通用性，此处定义的是数组。举个例子，当前的props传入的levelList={[3]}。
+
+    修改点：
+
+    (1)在Cascader/Menu.js中，render()方法中的const menus内，修改如下：
+
+        将
+        if (item.children)
+        改成
+        if (item.children || (levelList && levelList.length && levelList.indexOf(item.level) != -1)) 
+
+    (2)在Cascader/Menu.js中,activeItem()中，修改如下：
+
+        if (this.parent().props.changeOnSelect) {
+            this.parent().handlePick(this.state.activeValue, this.state.activeLabel,false);
+            //下面这几行是新增的
+            let levelList = this.parent().props.levelList;
+            if(levelList && levelList.length && levelList.indexOf(item.level) != -1){
+                this.parent().handleActiveItemChange(this.state.activeValue,this.state.activeLabel);
+            }
+        }
+
+***
+**13.**
+
