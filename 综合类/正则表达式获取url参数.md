@@ -1,16 +1,17 @@
-/**
-   * »ñÈ¡µ±Ç°URL²ÎÊıÖµ
-   * @param name	²ÎÊıÃû³Æ
-   * @return	²ÎÊıÖµ
-   */
-  getUrlParam(name) {
-    var reg = new RegExp('[?&]'+name+'=([^&#]+)');
-    var r = window.location.hash.substr(1).match(reg);
-    if (r != null) return unescape(r[1]);
-    return "";
-  }
+  ### æ­£åˆ™è¡¨è¾¾å¼è·å–urlå‚æ•°
+  
+    /**
+    * è·å–å½“å‰URLå‚æ•°å€¼
+    * @param name	å‚æ•°åç§°
+    * @return	å‚æ•°å€¼
+    */
+    getUrlParam(name) {
+      var reg = new RegExp('[?&]'+name+'=([^&#]+)');
+      var r = window.location.hash.substr(1).match(reg);
+      if (r != null) return unescape(r[1]);
+      return "";
+    }
 
-//ĞÎÈç£ºhttp://localhost:8080/#/wqq/res/resList/detail?resGroupId=151#1
+å½¢å¦‚ï¼šhttp://localhost:8080/#/wqq/res/resList/detail?resGroupId=151#1
 
-²Î¿¼×ÊÁÏ£º
-https://blog.csdn.net/wqq1018893786/article/details/73895250
+å‚è€ƒèµ„æ–™ï¼šhttps://blog.csdn.net/wqq1018893786/article/details/73895250
