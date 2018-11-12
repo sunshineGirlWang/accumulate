@@ -172,6 +172,18 @@
 	有时候我们不希望所有动作一起发生，而是按照一定顺序，逐个进行。
     A.使用 .forEach()
     	
+17、
+    setTimeout(function(){console.log(1)},0);
+
+    new Promise(function(resolve,reject){
+    console.log(2);
+    setTimeout(function(){resolve()},0)
+    }).then(function(){console.log(3)
+    }).then(function(){console.log(4)});
+
+    process.nextTick(function(){console.log(5)});
+
+    console.log(6)
 
 
 
