@@ -419,4 +419,36 @@
           那它就会查找index.js（或者是编译后的附加模块index.node）。
 
     (2)使用模块进行开发
+        package.json文件，如果增加了private属性，则表示：npm不能将现在还不想发布的模块发布到外部的npm源中。
+        {
+            "name": "album-manager",
+            "version": "1.0.0",
+            "main": "./lib/albums.js",
+            "private": true
+        }
+        
+22、发布模块
+    (1)如果想要把模块共享，就需要使用npm publish发布到官方的npm模块注册中心。
+
+        A.删除package.json文件的"private":true。
+
+        B.在npm注册服务器上使用npm adduser命令创建一个账户。
+
+        C.可以选择向package.json文件中添加更多字段（npm help json）。
+
+        D.在模块的目录上执行 npm publish ，把模块发布到npm。
+
+    (2)移除模块：npm unpublish
+
+23、async的npm模块
+    async.waterfall
+    async.series
+    async.parallel
+    async.auto
+
+24、使用Stream处理静态内容
     
+
+25、
+
+26、
