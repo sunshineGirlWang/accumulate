@@ -253,6 +253,9 @@ index.js中使用redux的combineReducers()方法，将各个子reducer聚合在�
 
 2、Provider提供的是一个顶层容器的作用，实现store的上下文传递。
 
+3、一个基础的connect方法如下：
+
+    connect(mapStateToProps, mapDispatchToProps, mergeProps, options = {}) 
 
 ### 高级
 #### 异步action
