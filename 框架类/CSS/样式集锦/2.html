@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>2</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <div class="apply-order-checked-result">
+        <div class="header">
+            <a  class="head-back"><i class="icon-back"></i></a>
+            审批单校验
+        </div>
+        <div class="content">
+            <div class="view">
+                <div class="title">您预订的产品不符合审批权限规定，具体信息如下：</div>
+                <div class="item-list">
+                    <div class="item">
+                        <div class="first-row">
+                            <span class="name">出发日期</span>
+                            <span class="apply-info error">2018-06-12</span>
+                            <span class="flag error-flag"></span>
+                        </div>
+                        <div class="second-row">
+                            可选范围：2018-06-13至2018-06-15
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="first-row">
+                            <span class="name">出发/到达城市</span>
+                            <span class="apply-info">南京-北京</span>
+                            <span class="flag right-flag"></span>
+                        </div>
+                        <div class="second-row">
+                            可选范围：南京-上海
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="first-row">
+                            <span class="name">出行人</span>
+                            <span class="apply-info error">张保庆、小红果、菜瓜、二鼻子、杨队长等等等等等</span>
+                            <span class="flag error-flag"></span>
+                        </div>
+                        <div class="second-row">
+                            可选范围：张保庆、小红果、菜瓜、二鼻子、杨队长等等等等等
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="first-row">
+                            <span class="name">可订金额</span>
+                            <span class="apply-info error">￥200001.99</span>
+                            <span class="flag error-flag"></span>
+                        </div>
+                        <div class="second-row">
+                            可选范围：￥9999999.99
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="first-row">
+                            <span class="name">产品类型</span>
+                            <span class="apply-info error">火车票</span>
+                            <span class="flag error-flag"></span>
+                        </div>
+                        <div class="second-row">
+                            可选范围：酒店、火车票、国内机票
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="operate">
+                <button type="button" class="btn-warm">更换审批单</button>
+                <button type="button" class="btn-cold">修改预订信息</button>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+.apply-order-checked-result, .apply-order-checked-result .content {
+    top: 0;
+    height: 100%;
+    width: 100%;
+    left: 0;
+}
+
+.apply-order-checked-result {
+    z-index: 1052;
+    position: absolute;
+    background: #fff;
+}
+
+.apply-order-checked-result .error{
+    color: red;
+}
+
+.apply-order-checked-result .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 8px;
+    overflow: hidden;
+    background: #d6b864;
+    color: #fff;
+    text-align: center;
+    z-index: 4;
+}
+
+.apply-order-checked-result .header .head-back {
+    position: absolute;
+    top: 0;
+    left: 8px;
+    color: #fff;
+}
+
+.apply-order-checked-result .header .head-back .icon-back {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    vertical-align: top;
+    background: url() 0 10px no-repeat;
+}
+
+.apply-order-checked-result .content {
+    position: fixed;
+    padding-top: 40px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 2
+}
+
+.apply-order-checked-result .view{
+    padding: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+.apply-order-checked-result .content > .operate{
+    width: 100%;
+    font-size: 0;
+}
+
+.apply-order-checked-result button {
+    border: none;
+    text-align: center;
+    padding: 10px 20px;
+    width: 50%;
+}
+
+.apply-order-checked-result button.btn-cold {
+    color: #fff;
+    background: #d6b864;
+}
+
+.apply-order-checked-result button.btn-warm {
+    color: #fff;
+    background: #f46d6d;
+}
+
+.apply-order-checked-result .content .view .title{
+    line-height: 20px;
+    position: relative;
+    font-weight: 700;
+}
+
+.apply-order-checked-result .item-list{
+    position: relative;
+    line-height: 25px;
+}
+
+.apply-order-checked-result .item-list .item{
+    margin: 15px 0;
+}
+
+.apply-order-checked-result .item-list .item span{
+    display: inline-block;
+}
+
+.apply-order-checked-result .item-list .item .name{
+    width: 32%;
+    text-align: left;
+}
+
+.apply-order-checked-result .item-list .item .apply-info{
+    width: 60%;
+    text-align: right;
+    vertical-align: top;
+}
+
+.apply-order-checked-result .item-list .item .flag{
+    position: absolute;
+    right: 0;
+    width: 5%;
+    max-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: none;
+    background-size: 100%;
+}
+
+.apply-order-checked-result .item-list .first-row{
+    position: relative;
+}
+
+.apply-order-checked-result .item-list .second-row{
+    border: 1px dashed #ddd;
+    color: #999;
+}
+
+.apply-order-checked-result .right-flag{
+    background: url() center center no-repeat;
+}
+
+.apply-order-checked-result .error-flag{   
+    background: url() center center no-repeat;
+}
+</style>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>三块布局的页面</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+        <script src="main.js"></script> -->
+        <style>
+            .apply-order-checked-result{
+                width: 800px;
+                padding: 20px;
+                line-height: 30px;
+                font-size: 14px;
+            }
+            .apply-order-checked-result .txt-c{
+                text-align: center;
+            }
+            .apply-order-checked-result .fs-12px{
+                font-size: 12px;
+            }
+            .apply-order-checked-result .error{
+                color: red;
+            }
+            .apply-order-checked-result .order-info{
+                float:left;
+                width: 40%;
+            }
+            .apply-order-checked-result .order-info .color-blue{
+                color: #4B7ACC;
+            }
+            .apply-order-checked-result .order-info .content{
+                border: 1px dashed #4B7ACC;
+                padding-top: 15px;
+            }
+            .apply-order-checked-result .order-info .content .row{
+                line-height: 20px;
+                height: 80px;
+                overflow: auto;
+            }
+            .apply-order-checked-result .order-info .content .row.date{
+                height: 40px;
+            }
+            .apply-order-checked-result .order-info .content .row.amount{
+                height: 35px;
+            }
+            .apply-order-checked-result .order-info .content .row.city .journey{
+                position: relative;
+            }
+            .apply-order-checked-result .order-info .content .row.city .journey .journey-way{
+                position: absolute;
+                top: -5px;
+                width: 50px;
+                font-size: 12px;
+                text-align: center; 
+                border-bottom: 1px solid #000;
+            }
+            .apply-order-checked-result .order-info .content .row.city .journey .arrive-city{
+                margin-left: 50px;
+            }
+            .apply-order-checked-result .middle-column{
+                float: left;
+                width: 20%;
+                margin-top: 12px;
+            }
+            .apply-order-checked-result .middle-column .row{
+                width:160px;
+            }
+            .apply-order-checked-result .middle-column .row.date{
+                padding-top: 30px;
+            }
+            .apply-order-checked-result .middle-column .row.city{
+                padding-top: 10px;
+            }
+            .apply-order-checked-result .middle-column .row.person,
+            .apply-order-checked-result .middle-column .row.amount{
+                padding-top: 50px;
+            }
+            
+            .apply-order-checked-result .middle-column .line{
+                display:inline-block;
+                width:25px;
+                border-top:1px solid #4B7ACC;
+                vertical-align:4px;
+            }
+            .apply-order-checked-result .middle-column .text{
+                display: inline-block;
+                width: 90px;
+            }
+            .apply-order-checked-result .btn{
+                width: 100px;
+                height: 30px;
+                margin: 15px;
+                text-align: center;
+                border: 1px solid #4B7ACC;
+                color: #fff;
+                background: #4B7ACC;
+            }
+            .apply-order-checked-result .btn.primary-btn{
+                color: #fff;
+                background: #4B7ACC;
+            }
+            .apply-order-checked-result .btn.info-btn{
+                color: #4B7ACC;
+                background: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="apply-order-checked-result">
+            <strong>您预订的产品不符合审批权限规定，具体信息如下：</strong>
+            <div class="txt-c">
+                <div class="order-info">
+                    <strong class="color-blue">
+                        预订单
+                    </strong>
+                    <div class="content">
+                        <div class="row date">出发日期--</div>
+                        <div class="row city">
+                            <div class="journey">
+                                <span>南京</span>
+                                <span class="journey-way">单程</span>
+                                <span class="arrive-city">北京</span>
+                            </div>
+                            <div class="journey">
+                                <span>北京</span>
+                                <span class="journey-way error">往返</span>
+                                <span class="arrive-city">上海</span>
+                            </div>
+                        </div>
+                        <div class="row person">出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人出行人--</div>
+                        <div class="row amount">可订金额--</div>
+                    </div>
+                </div>
+                <div class="middle-column">
+                    <div class="row date">
+                        <span class="line"></span>
+                        <span class="text">出发日期</span>
+                        <span class="line"></span>
+                    </div>
+                    <div class="row city">
+                        <span class="line"></span>
+                        <span class="text">出发/到达城市</span>
+                        <span class="line"></span>
+                    </div>
+                    <div class="row person">
+                        <span class="line"></span>
+                        <span class="text">出行人</span>
+                        <span class="line"></span>
+                    </div>
+                    <div class="row amount">
+                        <span class="line"></span>
+                        <span class="text">可订金额</span>
+                        <span class="line"></span>
+                    </div>         
+                </div>
+        
+                <div class="order-info">
+                    <strong class="color-blue">
+                        审批单
+                    </strong>
+                    <div class="content">
+                        <div class="row date">出发日期--</div>
+                        <div class="row city">出发城市到达城市出发城市到达城市出发城市到达城市出发城市到达城市出发城市到达城市出发城市到达市到达城市出发城市到达城市市到达城市出发城市到达城市城市出发城市到达城市出发城市到达城市出发城市到达城市--</div>
+                        <div class="row person">出行人<span class="fs-12px">(已购去程)</span></div>
+                        <div class="row amount">可订金额--</div>
+                    </div>
+                </div>
+            </div>
+            <div class="txt-c">
+                <button class="btn primary-btn">修改预订信息</button>
+                <button class="btn info-btn">更换审批单</button>
+            </div>
+        </div>
+    </body>
+</html>
