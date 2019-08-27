@@ -259,6 +259,28 @@ index.js中使用redux的combineReducers()方法，将各个子reducer聚合在�
 
 ### 高级
 #### 异步action
+1、当调用异步API时，有两个非常关键的时刻：发起请求的时刻，接收到响应的时刻（也可能是超时）。
+
+2、一般情况下，每个API请求都需要dipatch至少三种action：
+（1）一种通知reducer请求开始的action。
+    对于这种action，reducer可能会切换一下state中的isFetching标记。
+    以此来告诉UI显示加载界面。
+
+（2）一种通知reducer请求成功的action。
+    对于这种action，reducer可能会把接收到的新数据合并到stable中，并重置isFetching。
+    UI则会隐藏加载界面，并显示接收到的数据。
+
+（3）一种通知reducer请求失败的action。
+    对于这种action，reducer可能会重置isFetching。
+    另外，有些reducer会保存这些失败信息，并在UI里显示出来。
+
+3、为了区分这三种action，可在action里添加一个专门的status字段作为标记位，或者定义成不同的type。
+    推荐使用不同的type，会减低犯错的机率。
+
+4、
+
+5、
+
 #### 异步数据流
 #### middleware
 #### 搭配 react router
