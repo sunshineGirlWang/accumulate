@@ -211,5 +211,34 @@
 
 ### 使用dva开发复杂SPA
 #### 动态加载model
+    通常使用webpack的require.ensure来做代码模块的懒加载。
     
-#### 
+    function RouterConfig({ history, app }) {
+        const routes = [
+            {
+                path: '/',
+                name: 'IndexPage',
+                getComponent(nextState, cb) {
+                    require.ensure([], (require) => {
+                    registerModel(app, require('./models/dashboard'));
+                    cb(null, require('./routes/IndexPage'));
+                    });
+                },
+            },
+            {
+                path: '/users',
+                name: 'UsersPage',
+                getComponent(nextState, cb) {
+                    require.ensure([], (require) => {
+                    registerModel(app, require('./models/users'));
+                    cb(null, require('./routes/Users'));
+                    });
+                },
+            },
+        ];
+
+        return <Router history={history} routes={routes} />;
+    }
+
+#### 使用model共享全局信息
+    
