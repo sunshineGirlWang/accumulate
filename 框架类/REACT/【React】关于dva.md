@@ -241,4 +241,61 @@
     }
 
 #### 使用model共享全局信息
+    如果当前应用中加载了不止一个model，在其中一个的effect里面做select操作，是可以获取另外一个中的state的。
+
+    *foo(action,{ select }){
+        const { a,b } = yield select();
+    }
+
+    a,b可以分别是两个不同model的state。
+
+#### model的复用
+    用namespace作为key，在不同的视图容器中去connect。
+
+#### 动态扩展model
+    在一个effect中，可以使用多个put来分别调用reducer来更新状态。
+
+#### 使用take操作进行事件监听
+    场景：一个流程的变动，需要扩散到若干个其他model中
+
+    someSource.on('click', event => doSomething(event))
+    可改成：
+    function* saga() {
+        while(true) {
+            const event = yield take('click');
+            doSomething(event);
+        }
+    }
+
+#### 多任务调度
+    1、任务的并行执行
+    const [result1, result2]  = yield all([
+        call(service1, param1),
+        call(service2, param2)
+    ])
+
+    2、任务的竞争
+    const { data, timeout } = yield race({
+        data: call(service, 'some data'),
+        timeout: call(delay, 1000)
+    });
+    if (data){
+        put({type: 'DATA_RECEIVED', data});
+    }else{
+        put({type: 'TIMEOUT_ERROR'});
+    }
+
+#### 跨model的通信
+    场景：一个流程贯穿多个model
+    可以使用namaspace去指定接受action的model；也可以使用take方法。
+
+#### 为DVA应用编写测试
+    单元测试：测试某个函数自身的逻辑是否全被覆盖。验证是否发起了对某个服务的调用。
     
+    同redux-saga的测试机制和方法，从model对象中获取reducer和effect，分别编写测试用例。
+
+### DVA源码解析
+####
+####
+####
+####
